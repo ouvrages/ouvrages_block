@@ -1,0 +1,7 @@
+class Title < ApplicationRecord
+  belongs_to :parent, polymorphic: true
+
+  def self.permitted_attributes
+    [:id, :title, :position, :_destroy]
+  end
+end

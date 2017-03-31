@@ -1,0 +1,15 @@
+%h3= form.object.class.human_attribute_name(:blocks)
+
+.row
+  .block-forms.col-xs-10
+    - form.object.blocks.each do |block|
+      .block-form.panel.panel-primary= form.block_form block
+
+  .block-buttons.btn-group-vertical.col-xs-2{data: { spy: "affix" }}
+    - form.object.block_names.each do |block_name|
+      - new_block = form.block_form block_name.to_s.classify.constantize.new
+      %button.btn.btn-default.btn-block.btn-lg{data: { form: new_block }, type: "button"}
+        .pull-left
+          %span.glyphicon.glyphicon-plus
+          = block_name.to_s.singularize.classify.constantize.model_name.human
+

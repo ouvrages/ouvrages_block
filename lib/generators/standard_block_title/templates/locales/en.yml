@@ -1,0 +1,7 @@
+en:
+  activerecord:
+    models:
+      title: Title
+    attributes:
+      title:
+        title: Title

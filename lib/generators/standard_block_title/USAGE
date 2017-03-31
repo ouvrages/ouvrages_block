@@ -1,0 +1,13 @@
+Description:
+  Generate title block
+
+Example:
+    rails generate standard_block_title
+
+    This will create:
+      db/migrate/xxxxx_create_titles.rb
+      app/models/title.rb
+      app/views/admin/titles/_block_form.html.haml
+      app/views/titles/_title.html.haml
+      config/locales/title.fr.yml
+      config/locales/title.en.yml
