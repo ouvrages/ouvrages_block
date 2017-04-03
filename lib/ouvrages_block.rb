@@ -4,6 +4,8 @@ require "bootstrap_form/form_builder"
 require "ouvrages_block/version"
 require "ouvrages_block/block_field"
 
+require "scrollto-rails"
+
 module OuvragesBlock
 
   module Rails

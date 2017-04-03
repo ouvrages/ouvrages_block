@@ -1,3 +1,5 @@
+//= require scrollTo
+
 createBlockButtons = function()  {
   $(".block-buttons button").each(function(index, button) {
     $(button).off("click");
