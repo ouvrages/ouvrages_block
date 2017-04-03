@@ -22,9 +22,9 @@ module OuvragesBlock
         accepts_nested_attributes_for block_name, allow_destroy: true
       end
 
-      define_method "block_permitted_attributes" do
+      define_singleton_method "block_permitted_attributes" do
         block_names.map do |block_name|
-          { "#{block_name}_attributes" => send(block_name).permitted_attributes }
+          { "#{block_name}_attributes" => block_name.to_s.singularize.classify.constantize.permitted_attributes }
         end
       end
 
