@@ -1,6 +1,6 @@
 require 'rails/generators/active_record/migration'
 
-class StandardBlockTitleGenerator < Rails::Generators::Base
+class StandardBlockRichTextGenerator < Rails::Generators::Base
   include Rails::Generators::Migration
   source_root File.expand_path('../templates', __FILE__)
 
@@ -14,12 +14,12 @@ class StandardBlockTitleGenerator < Rails::Generators::Base
 
   def create_migration_file
     if migration?
-      template "migrations/migration.rb", "db/migrate/#{StandardBlockTitleGenerator.next_migration_number(standard_block_name_singular)}_create_#{standard_block_name_plural}.rb"
+      template "migrations/migration.rb", "db/migrate/#{StandardBlockRichTextGenerator.next_migration_number(standard_block_name_singular)}_create_#{standard_block_name_plural}.rb"
     end
   end
 
   def create_model_file
-    template "models/title.rb.erb", File.join("app", "models", standard_block_name_singular + ".rb")
+    template "models/rich_text.rb.erb", File.join("app", "models", standard_block_name_singular + ".rb")
   end
 
   def create_locale_files
@@ -45,10 +45,10 @@ class StandardBlockTitleGenerator < Rails::Generators::Base
   end
 
   def standard_block_name_singular
-    "title"
+    "rich_text"
   end
 
   def standard_block_name_plural
-    "titles"
+    "rich_texts"
   end
 end

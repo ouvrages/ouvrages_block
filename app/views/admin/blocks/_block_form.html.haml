@@ -1,8 +1,8 @@
-- block_name = block.class.to_s.downcase.pluralize
+- block_name = block.class.to_s.tableize
 
 .panel-heading
   .panel-title
-    = block_name.to_s.singularize.classify.constantize.model_name.human
+    = block_name.to_s.classify.constantize.model_name.human
     .pull-right
       %span.glyphicon.glyphicon-minus.collapse-block-form-buttom
       %span.glyphicon.glyphicon-trash.remove-block-form-button

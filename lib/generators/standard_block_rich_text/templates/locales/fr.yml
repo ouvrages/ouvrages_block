@@ -1,0 +1,7 @@
+fr:
+  activerecord:
+    models:
+      rich_text: Texte riche
+    attributes:
+      rich_text:
+        text: Texte
