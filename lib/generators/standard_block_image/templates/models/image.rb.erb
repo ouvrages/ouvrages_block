@@ -1,0 +1,9 @@
+class Image < ApplicationRecord
+  dragonfly_accessor :image
+
+  belongs_to :parent, polymorphic: true
+
+  def self.permitted_attributes
+    [:id, :title, :position, :_destroy, :image]
+  end
+end

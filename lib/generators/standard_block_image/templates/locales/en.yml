@@ -1,0 +1,8 @@
+fr:
+  activerecord:
+    models:
+      image: Image
+    attributes:
+      image:
+        image_uid: Image ID
+        image_name: Image
