@@ -1,0 +1,7 @@
+class <%= standard_block_name_singular.capitalize %> < ApplicationRecord
+  belongs_to :parent, polymorphic: true
+
+  def self.permitted_attributes
+    <%= [:id, :position, :_destroy].concat(attributes.map(&:name).map(&:to_sym)) %>
+  end
+end
