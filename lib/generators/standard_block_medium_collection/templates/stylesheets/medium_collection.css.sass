@@ -1,0 +1,38 @@
+.medium-collection-form
+  &.dragover
+    background: #eee
+  .medium
+    overflow: hidden
+    display: inline-block
+    background: white
+    margin: 0 8px 8px 0
+
+    &.disabled
+      opacity: 0.3
+
+    .preview
+      width: 100px
+      height: 100px
+      .file-name
+        word-wrap: break-word
+        font-size: 12px
+    .caption
+      height: 20px
+      margin-top: 2px
+      padding: 0
+      position: relative
+      .name
+        width: 100px - 22px
+      .cancel, .remove-medium
+        position: absolute
+        z-index: 1
+        bottom: 110px
+        right: 0
+        cursor: pointer
+      .remove-medium
+        display: block
+        color: #333
+      .progress
+        margin-bottom: 0
+    .medium-description
+      width: 100px

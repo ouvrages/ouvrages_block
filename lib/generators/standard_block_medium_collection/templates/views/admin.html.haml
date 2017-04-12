@@ -1,0 +1,18 @@
+- template = capture do
+  .medium.thumbnail
+    .preview
+      %img{src: "", style: "width: 100px; height: 100px;" }
+    .caption
+      .progress
+        .progress-bar{style: "width:0%;"}
+      .cancel
+        %a.cancel-medium-upload
+          %span.glyphicon.glyphicon-remove
+
+.medium-collection-form{data: {create_url: admin_create_medium_url, sort_url: admin_sort_medium_url, template: template, field_name: block_form.object_name + "[mediums_attributes][__MEDIUM_INDEX__]" }}
+  .files-container
+    - block_form.object.mediums.each do |medium|
+      = render partial: "medium_collections/medium", locals: { medium: medium, field_name: block_form.object_name + "[mediums_attributes][__MEDIUM_INDEX__]" }
+  .input-container
+    %input.medium-collection-file-upload{type: "file", multiple: true}
+    Vous pouvez également glisser/déposer vos fichiers.

@@ -1,0 +1,7 @@
+class Medium < ApplicationRecord
+  self.table_name = "mediums"
+
+  dragonfly_accessor :file
+
+  belongs_to :collection, class_name: "MediumCollection", inverse_of: :mediums
+end

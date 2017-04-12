@@ -1,0 +1,15 @@
+.medium.thumbnail
+  - key = SecureRandom.random_number(10000)
+  = fields_for field_name.sub("__MEDIUM_INDEX__", key.to_s), medium do |f|
+    = f.hidden_field :id, class: "medium-id"
+    = f.hidden_field :_destroy, class: "destroy-medium"
+    = f.hidden_field :position, class: "medium-position"
+    = f.hidden_field :file_uid
+    - if f.object.file_stored?
+      .preview
+        = image_tag f.object.file.thumb("100x100").url
+    .caption
+      %a.remove-medium
+        %span.glyphicon.glyphicon-remove
+      = f.text_field :description, class: "medium-description", placeholder: "Description"
+

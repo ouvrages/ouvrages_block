@@ -1,0 +1,10 @@
+class MediumCollection < ApplicationRecord
+  belongs_to :parent, polymorphic: true
+
+  has_many :mediums, -> { order(:position) }, inverse_of: :collection, foreign_key: :collection_id, dependent: :destroy
+  accepts_nested_attributes_for :mediums, allow_destroy: true
+
+  def self.permitted_attributes
+    [:id, :position, :_destroy, mediums_attributes: [:id, :file_uid, :file, :position, :description, :_destroy]]
+  end
+end
