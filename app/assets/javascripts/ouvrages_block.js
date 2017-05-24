@@ -24,7 +24,7 @@ stickBlockButtons = function()  {
 
 generateBlockForm = function(button) {
   var $button = $(button);
-  var formData = $button.data("form");
+  var formData = $button.data("form").html;
   var blocksCount = $(".block-form").length;
 
   formData = formData.replace(/\[__.+?__\]/g, "[" + blocksCount + "]");

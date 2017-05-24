@@ -8,8 +8,8 @@
   .block-buttons.btn-group-vertical.col-xs-2{data: { spy: "affix" }}
     - form.object.block_names.each do |block_name|
       - new_block = form.block_form block_name.to_s.classify.constantize.new
-      - new_block = new_block.gsub("&quot;", "&amp;quot;").html_safe
-      %button.btn.btn-default.btn-block.btn-lg{data: { form: new_block }, type: "button"}
+      - new_block = new_block.html_safe
+      %button.btn.btn-default.btn-block.btn-lg{data: { form: { html: new_block }.to_json }, type: "button"}
         .pull-left
           %span.glyphicon.glyphicon-plus
           = block_name.to_s.classify.constantize.model_name.human
