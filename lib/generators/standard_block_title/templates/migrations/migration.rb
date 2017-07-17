@@ -1,4 +1,4 @@
-class CreateTitles < ActiveRecord::Migration[5.0]
+class CreateTitles < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
   def change
     create_table :titles do |t|
       t.references :parent, polymorphic: true

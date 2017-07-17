@@ -1,4 +1,4 @@
-class Create<%= standard_block_name_plural.capitalize %> < ActiveRecord::Migration
+class Create<%= standard_block_name_plural.capitalize %> < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
   def up
     create_table :<%= standard_block_name_plural %> do |t|
       t.references :parent, polymorphic: true

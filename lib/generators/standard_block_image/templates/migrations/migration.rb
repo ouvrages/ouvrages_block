@@ -1,4 +1,4 @@
-class CreateImages < ActiveRecord::Migration
+class CreateImages < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
   def up
     create_table :images do |t|
       t.references :parent, polymorphic: true

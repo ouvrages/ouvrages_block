@@ -1,4 +1,4 @@
-class CreateMediums < ActiveRecord::Migration
+class CreateMediums < ActiveRecord::Migration[<%= ActiveRecord::Migration.current_version %>]
   def up
     create_table :mediums do |t|
       t.references :collection
