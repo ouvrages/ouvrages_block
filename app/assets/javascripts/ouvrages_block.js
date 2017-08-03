@@ -1,7 +1,16 @@
 //= require scrollTo
-//= require sticky-kit
 
-$(document).on("click", ".block-buttons button", function(e) {
+$(document).on("click", ".collapse-block-buttons", function(e) {
+  e.preventDefault();
+  
+  var $button = $(this);
+
+  var $buttons = $button.closest(".block-buttons-group").find(".block-button");
+  $button.closest(".list-group").find(".block-button").not($buttons).addClass("hide");
+  $buttons.toggleClass("hide");
+});
+
+$(document).on("click", ".block-buttons .block-button", function(e) {
   e.preventDefault();
 
   var $button = $(this);
@@ -17,10 +26,6 @@ $(document).on("click", ".block-buttons button", function(e) {
     duration: 500
   });
 });
-
-stickBlockButtons = function()  {
-  $(".block-buttons").stick_in_parent({force_sticky: true});
-}
 
 generateBlockForm = function(button) {
   var $button = $(button);
@@ -41,12 +46,13 @@ updateBlockFormPositions = function() {
 };
 
 createSortable = function() {
-  $(".block-buttons").sortable({
+  $(".block-buttons .list-group .block-buttons-group").sortable({
     group: {
       name: "forms",
       pull: 'clone',
       put: false,
     },
+    filter: ".collapse-block-buttons",
     sort: false,
     animation: 150,
   });
@@ -106,11 +112,13 @@ $(document).on('turbolinks:before-render', function() {
 
 $(document).on('turbolinks:load', function() {
   $(document.body).initRichTextareas();
-});
-
-$(document).on("turbolinks:load", function(e) {
   createSortable();
-  stickBlockButtons();
+
+  $("#block-buttons-inner-affix").affix({
+    bottom: function() {
+      return (this.bottom = $(".block-forms").outerHeight() - $("#block-buttons-inner-affix").height());
+    },
+  })
 });
 
 $(document).on("click", ".remove-block-form-button", function(e) {
@@ -143,3 +151,7 @@ $(document).on("click", ".collapse-block-form-button", function(e) {
   }
 });
 
+
+$(window).on("scroll", function(e) {
+  $("#block-buttons-inner-affix.affix").css("top", $(window).height() - $("#block-buttons-inner-affix").outerHeight() + "px");
+});

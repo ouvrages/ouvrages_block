@@ -1,16 +1,31 @@
 %h3= form.object.class.human_attribute_name(:blocks)
 
 .row
-  .block-forms.col-xs-10
+  .block-forms{class: options[:block_left_class] }
     - form.object.blocks.each do |block|
       .block-form.panel.panel-primary= form.block_form block
 
-  .block-buttons.btn-group-vertical.col-xs-2{data: { spy: "affix" }}
-    - form.object.block_names.each do |block_name|
-      - new_block = form.block_form block_name.to_s.singularize.classify.constantize.new, template: true
-      - new_block = new_block.html_safe
-      %button.btn.btn-default.btn-block.btn-sm{data: { form: { html: new_block }.to_json }, type: "button"}
-        .pull-left
-          %span.glyphicon.glyphicon-plus
-          = block_name.to_s.classify.constantize.model_name.human
+  .block-buttons{class: options[:block_right_class] }
+    #block-buttons-inner-affix.affix-top
+      - if form.object.block_buttons.is_a?(Hash)
+        .list-group
+          - form.object.block_buttons.each do |group_name, block_names|
+            .block-buttons-group
+              %button.list-group-item.collapse-block-buttons= group_name
+              - block_names.each do |block_name|
+                - new_block = form.block_form block_name.to_s.singularize.classify.constantize.new, template: true
+                - new_block = new_block.html_safe
+                %button.block-button.list-group-item{data: { form: { html: new_block }.to_json }, type: "button", class: form.object.block_buttons.keys.size > 1 ? "hide" : nil}
+                  .pull-left
+                    %span.glyphicon.glyphicon-plus
+                    = block_name.to_s.classify.constantize.model_name.human
+
+      - else
+        - form.object.block_buttons.each do |block_name|
+          - new_block = form.block_form block_name.to_s.singularize.classify.constantize.new, template: true
+          - new_block = new_block.html_safe
+          %button.btn.btn-default.btn-block.btn-sm{data: { form: { html: new_block }.to_json }, type: "button"}
+            .pull-left
+              %span.glyphicon.glyphicon-plus
+              = block_name.to_s.classify.constantize.model_name.human
 
