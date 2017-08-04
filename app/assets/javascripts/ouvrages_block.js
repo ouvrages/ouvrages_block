@@ -1,8 +1,9 @@
 //= require scrollTo
+//= require sticky-kit.min
 
 $(document).on("click", ".collapse-block-buttons", function(e) {
   e.preventDefault();
-  
+
   var $button = $(this);
 
   var $buttons = $button.closest(".block-buttons-group").find(".block-button");
@@ -96,6 +97,7 @@ $.fn.initRichTextareas = function() {
 $(document).on("blocks:add", function(e, block) {
   $(block).initRichTextareas();
   createSortable();
+  $(document.body).trigger("sticky_kit:recalc");
 });
 
 $(document).on("blocks:move", function(e, block) {
@@ -114,11 +116,11 @@ $(document).on('turbolinks:load', function() {
   $(document.body).initRichTextareas();
   createSortable();
 
-  $("#block-buttons-inner-affix").affix({
-    bottom: function() {
-      return (this.bottom = $(".block-forms").outerHeight() - $("#block-buttons-inner-affix").height());
-    },
-  })
+  $("#block-buttons").stick_in_parent(
+    {
+      force_sticky: true,
+    }
+  );
 });
 
 $(document).on("click", ".remove-block-form-button", function(e) {
@@ -141,6 +143,7 @@ $(document).on("click", ".collapse-block-form-button", function(e) {
 
   open = $blockFormBody.hasClass('in');
   $blockFormBody.collapse('toggle');
+  $(document.body).trigger("sticky_kit:recalc");
 
   if (open) {
     $blockFormIcon.removeClass('glyphicon-minus');
@@ -149,9 +152,4 @@ $(document).on("click", ".collapse-block-form-button", function(e) {
     $blockFormIcon.removeClass('glyphicon-plus');
     $blockFormIcon.addClass('glyphicon-minus');
   }
-});
-
-
-$(window).on("scroll", function(e) {
-  $("#block-buttons-inner-affix.affix").css("top", $(window).height() - $("#block-buttons-inner-affix").outerHeight() + "px");
 });

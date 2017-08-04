@@ -5,29 +5,28 @@
     - form.object.blocks.each do |block|
       .block-form.panel.panel-primary= form.block_form block
 
-  .block-buttons{class: options[:block_right_class] }
-    #block-buttons-inner-affix.affix-top
-      - if form.object.block_buttons.is_a?(Hash)
-        .list-group
-          - form.object.block_buttons.each do |group_name, block_names|
-            .block-buttons-group
-              %button.list-group-item.collapse-block-buttons= group_name
-              - block_names.each do |block_name|
-                - new_block = form.block_form block_name.to_s.singularize.classify.constantize.new, template: true
-                - new_block = new_block.html_safe
-                %button.block-button.list-group-item{data: { form: { html: new_block }.to_json }, type: "button", class: form.object.block_buttons.keys.size > 1 ? "hide" : nil}
-                  .pull-left
-                    %span.glyphicon.glyphicon-plus
-                    = block_name.to_s.classify.constantize.model_name.human
-
-      - else
-        .list-group
+  .block-buttons#block-buttons{class: options[:block_right_class] }
+    - if form.object.block_buttons.is_a?(Hash)
+      .list-group
+        - form.object.block_buttons.each do |group_name, block_names|
           .block-buttons-group
-            - form.object.block_buttons.each do |block_name|
+            %button.list-group-item.collapse-block-buttons= group_name
+            - block_names.each do |block_name|
               - new_block = form.block_form block_name.to_s.singularize.classify.constantize.new, template: true
               - new_block = new_block.html_safe
-              %button.block-button.list-group-item{data: { form: { html: new_block }.to_json }, type: "button"}
+              %button.block-button.list-group-item{data: { form: { html: new_block }.to_json }, type: "button", class: form.object.block_buttons.keys.size > 1 ? "hide" : nil}
                 .pull-left
                   %span.glyphicon.glyphicon-plus
                   = block_name.to_s.classify.constantize.model_name.human
+
+    - else
+      .list-group
+        .block-buttons-group
+          - form.object.block_buttons.each do |block_name|
+            - new_block = form.block_form block_name.to_s.singularize.classify.constantize.new, template: true
+            - new_block = new_block.html_safe
+            %button.block-button.list-group-item{data: { form: { html: new_block }.to_json }, type: "button"}
+              .pull-left
+                %span.glyphicon.glyphicon-plus
+                = block_name.to_s.classify.constantize.model_name.human
 
