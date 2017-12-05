@@ -1,33 +1,24 @@
-//= require scrollTo
-
-$(document).on("click", ".collapse-block-buttons", function(e) {
-  e.preventDefault();
-  
-  var $button = $(this);
-
-  var $buttons = $button.closest(".block-buttons-group").find(".block-button");
-  $button.closest(".list-group").find(".block-button").not($buttons).addClass("hide");
-  $buttons.toggleClass("hide");
-});
-
-$(document).on("click", ".block-buttons .block-button", function(e) {
+$(document).on("click", ".block-button", function(e) {
   e.preventDefault();
 
   var $button = $(this);
+  var $buttonWrapper = $button.closest(".block-form");
+  var $blockForms = $button.closest(".ouvrages-blocks").find(".block-forms");
+  var buttonsHTML = $blockForms.data("buttons").html;
 
-  var $newBlock = generateBlockForm($button);
-  $(".block-forms").append($newBlock);
+  var $newBlock = generateBlockForm($button, buttonsHTML);
+
+  if ($buttonWrapper.length === 0) {
+    $blockForms.append($newBlock);
+  } else {
+    $newBlock.insertBefore($buttonWrapper);
+  }
 
   updateBlockFormPositions();
   $(document).trigger("blocks:add", $newBlock);
-
-  $(document).scrollTo($newBlock, {
-    offset: $newBlock.outerHeight(),
-    duration: 500
-  });
 });
 
-generateBlockForm = function(button) {
+generateBlockForm = function(button, buttonsHTML) {
   var $button = $(button);
   var formData = $button.data("form").html;
   var blocksCount = $(".block-form").length;
@@ -35,7 +26,9 @@ generateBlockForm = function(button) {
   formData = formData.replace(/\[__.+?__\]/g, "[" + blocksCount + "]");
   formData = formData.replace(/___NEW__.+?___/g, "_" + blocksCount + "_");
 
-  return $("<div class='block-form panel panel-primary'>" + formData + "</div>");
+  buttonsHTML = buttonsHTML.replace(/__ID__/g, "_" + blocksCount + "_");
+
+  return $("<div class='block-form'><div class='block-buttons'>" + buttonsHTML + "</div><div class='panel panel-primary'>" + formData + "</div>");
 };
 
 updateBlockFormPositions = function() {
@@ -46,17 +39,6 @@ updateBlockFormPositions = function() {
 };
 
 createSortable = function() {
-  $(".block-buttons .list-group .block-buttons-group").sortable({
-    group: {
-      name: "forms",
-      pull: 'clone',
-      put: false,
-    },
-    filter: ".collapse-block-buttons",
-    sort: false,
-    animation: 150,
-  });
-
   $(".block-forms").sortable({
     group: {
       name: "forms",
@@ -106,19 +88,13 @@ $(document).on("blocks:move", function(e, block) {
   $(block).initRichTextareas();
 });
 
-$(document).on('turbolinks:before-render', function() {
+$(document).on('turbolinks:before-cache', function() {
   tinyMCE.remove();
 });
 
 $(document).on('turbolinks:load', function() {
   $(document.body).initRichTextareas();
   createSortable();
-
-  $("#block-buttons-inner-affix").affix({
-    bottom: function() {
-      return (this.bottom = $(".block-forms").outerHeight() - $("#block-buttons-inner-affix").height());
-    },
-  })
 });
 
 $(document).on("click", ".remove-block-form-button", function(e) {
@@ -149,9 +125,4 @@ $(document).on("click", ".collapse-block-form-button", function(e) {
     $blockFormIcon.removeClass('glyphicon-plus');
     $blockFormIcon.addClass('glyphicon-minus');
   }
-});
-
-
-$(window).on("scroll", function(e) {
-  $("#block-buttons-inner-affix.affix").css("top", $(window).height() - $("#block-buttons-inner-affix").outerHeight() + "px");
 });

@@ -1,6 +1,6 @@
 module BlockField
-  def blocks_form(method = nil, options = { block_left_class: "col-xs-10", block_right_class: "col-xs-2" })
-    @template.render partial: "admin/blocks/blocks_form", locals: { form: self, options: options}
+  def blocks_form(method = nil)
+    @template.render partial: "admin/blocks/blocks_form", locals: { form: self }
   end
 
   def block_form(block, options = {})

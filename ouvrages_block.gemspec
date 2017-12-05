@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency "activerecord", "~> 5.0"
   spec.add_runtime_dependency "bootstrap_form", '>= 2.5.2'
-  spec.add_runtime_dependency "scrollto-rails"
+
   spec.add_runtime_dependency "sortable-rails"
   spec.add_runtime_dependency "tinymce-rails"
   spec.add_runtime_dependency "jquery-fileupload-rails"
