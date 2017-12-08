@@ -5,10 +5,7 @@ require "ouvrages_block/version"
 require "ouvrages_block/block_field"
 
 module OuvragesBlock
-
-  module Rails
-    class Engine < ::Rails::Engine
-    end
+  class Engine < ::Rails::Engine
   end
 
   extend ActiveSupport::Concern
