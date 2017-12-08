@@ -52,4 +52,12 @@ class BlockGenerator < Rails::Generators::NamedBase
   def standard_block_name_plural
     standard_block_name_singular.pluralize
   end
+
+  def migration_class_name
+    if Rails::VERSION::MAJOR >= 5
+      "ActiveRecord::Migration[#{Rails::VERSION::MAJOR}.#{Rails::VERSION::MINOR}]"
+    else
+      'ActiveRecord::Migration'
+    end
+  end
 end
