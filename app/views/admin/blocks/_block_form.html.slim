@@ -4,9 +4,9 @@
   .panel-title
     = block_name.to_s.classify.constantize.model_name.human
     .pull-right
-      %span.glyphicon.glyphicon-minus.collapse-block-form-button
-      %span.glyphicon.glyphicon-trash.remove-block-form-button
-      %span.glyphicon.glyphicon-resize-vertical.handler
+      span.glyphicon.glyphicon-minus.collapse-block-form-button
+      span.glyphicon.glyphicon-trash.remove-block-form-button
+      span.glyphicon.glyphicon-resize-vertical.handler
 .panel-body.collapse.in
   = form.fields_for block_name, block, child_index: index do |t|
     = t.hidden_field :id, value: block.id
