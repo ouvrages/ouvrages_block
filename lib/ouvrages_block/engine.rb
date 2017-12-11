@@ -15,6 +15,7 @@ module OuvragesBlock
   end
 end
 
+require "bootstrap_form"
 require "bootstrap_form/form_builder"
 require "ouvrages_block/block_field"
 
