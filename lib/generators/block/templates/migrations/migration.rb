@@ -1,4 +1,4 @@
-class Create<%= standard_block_name_plural.capitalize %> < <%= migration_class_name %>
+class Create<%= standard_block_migration_name %> < <%= migration_class_name %>
   def up
     create_table :<%= standard_block_name_plural %> do |t|
       t.references :parent, polymorphic: true
