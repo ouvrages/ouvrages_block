@@ -1,3 +1,9 @@
+//= require jquery
+//= require bootstrap-sprockets
+//= require sortable-rails-jquery
+//= require tinymce-jquery
+//= require jquery-fileupload
+
 $(document).on("click", ".block-button", function(e) {
   e.preventDefault();
 

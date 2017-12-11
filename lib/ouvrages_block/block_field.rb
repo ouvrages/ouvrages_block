@@ -1,6 +1,6 @@
 module BlockField
   def blocks_form(method = nil)
-    @template.render partial: "admin/blocks/blocks_form", locals: { form: self }
+    @template.render partial: "blocks/blocks_form", locals: { form: self }
   end
 
   def block_form(block, options = {})
@@ -12,6 +12,6 @@ module BlockField
       index = nil
     end
 
-    @template.render partial: "admin/blocks/block_form", locals: { form: self, block: block, index: index }
+    @template.render partial: "blocks/block_form", locals: { form: self, block: block, index: index }
   end
 end

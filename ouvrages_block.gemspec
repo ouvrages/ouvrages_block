@@ -31,9 +31,12 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rake", "~> 10.0"
 
   spec.add_runtime_dependency "activerecord", ">= 4.0"
+  spec.add_runtime_dependency "sass-rails"
+  spec.add_runtime_dependency "bootstrap-sass"
   spec.add_runtime_dependency "bootstrap_form", '>= 2.3.0'
-
+  spec.add_runtime_dependency "jquery-rails"
   spec.add_runtime_dependency "sortable-rails"
   spec.add_runtime_dependency "tinymce-rails"
+  spec.add_runtime_dependency "tinymce-rails-langs"
   spec.add_runtime_dependency "jquery-fileupload-rails"
 end

@@ -1,0 +1,7 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+
+.block-deleted,
+.sortable-ghost {
+  opacity: 0.6;
+}
