@@ -14,6 +14,8 @@ $(document).on("click", ".block-button", function(e) {
 
   var $newBlock = generateBlockForm($button, buttonsHTML);
 
+  $(this).closest(".collapse").collapse('hide');
+
   if ($buttonWrapper.length === 0) {
     $blockForms.append($newBlock);
   } else {
@@ -132,3 +134,12 @@ $(document).on("click", ".collapse-block-form-button", function(e) {
     $blockFormIcon.addClass('glyphicon-minus');
   }
 });
+
+$(document).on("show.bs.collapse", ".block-buttons", function(e) {
+  $(e.currentTarget).find(".blocks-toggle i").removeClass("glyphicon-plus").addClass("glyphicon-chevron-up");
+});
+
+$(document).on("hide.bs.collapse", ".block-buttons", function(e) {
+  $(e.currentTarget).find(".blocks-toggle i").removeClass("glyphicon-chevron-up").addClass("glyphicon-plus");
+});
+
