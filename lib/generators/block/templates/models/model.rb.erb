@@ -1,4 +1,4 @@
-class <%= standard_block_class_name %> < ApplicationRecord
+class <%= standard_block_class_name %> < <%= model_class_name %>
   belongs_to :parent, polymorphic: true
 
   def self.permitted_attributes

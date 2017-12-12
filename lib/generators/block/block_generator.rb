@@ -68,4 +68,12 @@ class BlockGenerator < Rails::Generators::NamedBase
       'ActiveRecord::Migration'
     end
   end
+
+  def model_class_name
+    if Rails::VERSION::MAJOR >= 5
+      "ApplicationRecord"
+    else
+      "ActiveRecord::Base"
+    end
+  end
 end
