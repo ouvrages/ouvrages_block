@@ -30,8 +30,8 @@ class StandardBlockRichTextGenerator < Rails::Generators::Base
   end
 
   def create_view_files
-    template "views/admin.html.haml", File.join("app", "views", "admin", standard_block_name_plural, "_block_form.html.haml")
-    template "views/show.html.haml", File.join("app", "views", standard_block_name_plural, "_#{standard_block_name_singular}.html.haml")
+    template "views/admin.html.slim", File.join("app", "views", "admin", standard_block_name_plural, "_block_form.html.slim")
+    template "views/show.html.slim", File.join("app", "views", standard_block_name_plural, "_#{standard_block_name_singular}.html.slim")
   end
 
   private
