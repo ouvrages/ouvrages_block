@@ -85,6 +85,9 @@ $.fn.initRichTextareas = function() {
 
 $(document).on("blocks:add", function(e, block) {
   $(block).initRichTextareas();
+  $(block).find(".address_picker").each(function(index, element) {
+    $(element).addressPickerField();
+  });
   createSortable();
 });
 
@@ -97,6 +100,9 @@ $(document).on("blocks:move", function(e, block) {
 });
 
 $(document).on('turbolinks:before-cache', function() {
+  $(".address_picker").each(function(index, element) {
+    $(this).find(".address").typeahead("destroy");
+  });
   tinyMCE.remove();
 });
 
