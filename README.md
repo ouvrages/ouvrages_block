@@ -21,26 +21,43 @@ And import css too.
 
 @import 'ouvrages_block';
 ```
+## Usage
 
-In model you want use `block`:
+Generate block with:
 
-```rb
-# model.rb
-
-has_blocks([:block])
+```sh
+rails generate block title_block title:string
 ```
 
-In form:
+```rb
+# app/models/article.rb
+
+class Article < ApplicationRecord
+  has_blocks([:title_blocks])
+end
+```
 
 ```slim
-= bootstrap_form_for ... do |f|
+# app/views/articles/_form.html.slim
+
+= bootstrap_form_for @article do |f|
   = f.blocks_form
 ```
 
-You can generate new block with:
+```slim
+= render @article.blocks
+```
 
-```sh
-rails generate block Name
+Modify the form representation in `frontend/components/title_blocks/_block_form.html.slim`:
+
+```slim
+= block_form.text_field :title
+```
+
+Modfy the view representation in `frontend/components/title_blocks/_title_block.html.slim`:
+
+```slim
+= title_block.title
 ```
 
 ## Standard blocks
